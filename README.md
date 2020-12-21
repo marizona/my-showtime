@@ -46,6 +46,11 @@ docker-compose up -d
 
 (Optional) DB web interface: http://localhost:8081/
 
+To stop the DB
+```Bash
+docker-compose down
+```
+
 ## Installation
 
 
