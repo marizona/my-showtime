@@ -26,11 +26,32 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
+## Prerequisite
+
+Install docker
+```Bash
+curl -sSL https://get.docker.com | sh
+```
+
+Install docker-compose
+```Bash
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
+```
+
+Start DB
+
+```Bash
+docker-compose up -d
+```
+
 ## Installation
+
 
 ```bash
 $ npm install
 ```
+
+
 
 ## Running the app
 
