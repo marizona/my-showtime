@@ -44,6 +44,8 @@ Start DB
 docker-compose up -d
 ```
 
+(Optional) DB web interface: http://localhost:8081/
+
 ## Installation
 
 
