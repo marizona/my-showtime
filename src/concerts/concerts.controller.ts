@@ -1,30 +1,42 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { ConcertsService } from './concerts.service';
 import { CreateConcertsDto } from './dto/create-concerts.dto';
-import { Concerts } from './interfaces/concerts.interface';
+// import { Concerts } from './interfaces/concerts.interface';
+import { Concert } from './schemas/concert.schema';
 
 @Controller(`concerts`)
 export class ConcertsController {
   constructor(private readonly concertsService: ConcertsService) {}
 
   @Get()
-  getConcerts(): Concerts[] {
+  async getConcerts(): Promise<Concert[]> {
     return this.concertsService.getConcerts();
   }
   @Get(':id')
-  getConcert(@Param('id') id): Concerts {
+  async getConcert(@Param('id') id): Promise<Concert> {
     return this.concertsService.getConcert(id);
   }
   @Post()
-  createConcert(@Body() createConcertDto: CreateConcertsDto): string {
-    return `${createConcertDto.band} added for the day ${createConcertDto.date}`;
-  }
-  @Put(':id')
-  updateConcert(@Param('id') id): string {
-    return this.concertsService.updateConcert(id);
+  createConcert(@Body() createConcertDto: CreateConcertsDto): Promise<Concert> {
+    return this.concertsService.createConcert(createConcertDto);
   }
   @Delete(':id')
-  deleteConcert(@Body() updateConcert: CreateConcertsDto, @Param('id') id): string {
+  deleteConcert(@Param('id') id): Promise<Concert> {
     return this.concertsService.deleteConcert(id);
+  }
+  @Put(':id')
+  updateConcert(
+    @Body() updateConcertDto: CreateConcertsDto,
+    @Param('id') id,
+  ): Promise<Concert> {
+    return this.concertsService.updateConcert(id, updateConcertDto);
   }
 }

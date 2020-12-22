@@ -1,39 +1,35 @@
 import { Injectable } from '@nestjs/common';
-import { Concerts } from './interfaces/concerts.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+// import { Concerts } from './interfaces/concerts.interface';
+import { Concert, ConcertDocument } from './schemas/concert.schema';
+// import { CreateConcertsDto } from "./dto/create-concerts.dto";
+// import { CreateConcertsDto } from './dto/create-concerts.dto';
 
 @Injectable()
 export class ConcertsService {
-  private readonly concerts: Concerts[] = [
-    {
-      id: '1',
-      band: 'Swans',
-      location: 'Kawati',
-      date: '20/12/2020',
-      genre: 'Experimental Rock',
-    },
-    {
-      id: '2',
-      band: 'Wolves in the Throne Room',
-      location: 'Grillen',
-      date: '20/12/2021',
-      genre: 'Cascadian Black Metal',
-    },
-  ];
-  getConcerts(): Concerts[] {
-    return this.concerts;
+  constructor(
+    @InjectModel('Concert')
+    private readonly concertModel: Model<ConcertDocument>,
+  ) {}
+  //TODO ADD MIDDLEWARE FOR ADMIN
+
+  async getConcerts(): Promise<Concert[]> {
+    return this.concertModel.find();
   }
-  getConcert(id: string): Concerts {
-    return this.concerts.find((concert) => concert.id === id);
+  async getConcert(id: string): Promise<Concert> {
+    return this.concertModel.findOne({ _id: id });
   }
-  createConcert() {
-    return 'Concert créé';
+  async createConcert(concert: Concert): Promise<Concert> {
+    const newConcert = new this.concertModel(concert);
+    return newConcert.save();
   }
 
-  updateConcert(id) {
-    return `Concert n°${id} modifié`;
+  async updateConcert(id: string, concert: Concert): Promise<Concert> {
+    return this.concertModel.findByIdAndUpdate(id, concert, { new: true });
   }
 
-  deleteConcert(id) {
-    return `Concert n° ${id} supprimé`;
+  async deleteConcert(id: string): Promise<Concert> {
+    return this.concertModel.findByIdAndRemove(id);
   }
 }
