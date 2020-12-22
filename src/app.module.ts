@@ -3,6 +3,7 @@ import { UsersModule } from './users/users.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConcertsModule } from './concerts/concerts.module';
+import { BookingModule } from './booking/booking.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import config from './config/keys';
@@ -11,6 +12,7 @@ import config from './config/keys';
   imports: [
     UsersModule,
     ConcertsModule,
+    BookingModule,
     MongooseModule.forRoot(config.mongo),
     AuthModule,
   ],
