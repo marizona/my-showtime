@@ -40,7 +40,7 @@ export class UsersService {
       id: user.id,
       username: user.username,
       email: user.email,
-      // password: user.password,
+      booking: user.booking,
       admin: user.admin,
     }));
   }
@@ -51,7 +51,7 @@ export class UsersService {
       id: user.id,
       username: user.username,
       email: user.email,
-      // password: user.password,
+      booking: user.booking,
       admin: user.admin,
     };
   }
@@ -110,6 +110,19 @@ export class UsersService {
     } else {
       throw Error;
     }
+  }
+
+  async updateBooking(
+    userId: string,
+    bookingID: string,
+  ) {
+    const updatedUser = await this.findUser(userId);
+    if (bookingID) {
+      updatedUser.booking.push(bookingID);
+    }
+
+    updatedUser.save();
+    return updatedUser;
   }
 
   validateUser(email: string, password: string): Observable<any> {
