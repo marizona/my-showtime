@@ -1,4 +1,4 @@
-import { Controller,Post,Body,Get,Param,Patch,Delete,HttpStatus } from '@nestjs/common';
+import { Controller,Post,Body,Get,Param,Put,Delete,HttpStatus } from '@nestjs/common';
 import { UsersService } from './users.service';
 
 @Controller('users')
@@ -41,7 +41,7 @@ export class UsersController {
             return this.usersService.getSingleUser(userId);
         }
     
-        @Patch(':id')
+        @Put(':id')
         async updateUser(
             @Param('id') userId: string,
             @Body('username') userUsername: string,
