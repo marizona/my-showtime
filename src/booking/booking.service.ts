@@ -27,6 +27,7 @@ export class BookingService {
 
     let booking = await newBooking.save()
 
+    //TODO get the user ID from the midleware, (midleware can get the user ID from the token).
     this.usersService.updateBooking("5fe1e57426edf930b0fbb8ac", booking._id)
 
     return booking
