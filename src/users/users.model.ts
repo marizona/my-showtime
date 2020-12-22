@@ -12,5 +12,5 @@ export interface User extends mongoose.Document {
   username: string;
   email: string;
   password: string;
-  admin: Boolean;
+  admin: boolean;
 }

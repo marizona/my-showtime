@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { ConcertsService } from './concerts.service';
 import { CreateConcertsDto } from './dto/create-concerts.dto';
-// import { Concerts } from './interfaces/concerts.interface';
 import { Concert } from './schemas/concert.schema';
 
 @Controller(`concerts`)

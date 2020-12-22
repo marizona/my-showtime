@@ -5,28 +5,33 @@ import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
 import { User } from './users.model';
+import { AuthService } from '../auth/auth.service';
+import { from, Observable } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class UsersService {
-  constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
+  constructor(
+    @InjectModel('User') private readonly userModel: Model<User>,
+    private authService: AuthService,
+  ) {}
 
   async insertUser(
     username: string,
     email: string,
     password: string,
-    admin: Boolean,
+    admin: boolean,
   ) {
-    const salt = await bcrypt.genSalt();
-    const hash = await bcrypt.hash(password, salt);
-
+    // const salt = await bcrypt.genSalt();
+    // const hash = await bcrypt.hash(password, salt);
+    // console.log(this.authService.hashPassword(password));
     const newUser = new this.userModel({
       username,
       email,
-      password: hash,
-      admin,
+      password: await this.authService.hashPassword(password),
+      admin: false,
     });
-    const result = await newUser.save();
-    return result;
+    return await newUser.save();
   }
 
   async getUsers() {
@@ -35,7 +40,7 @@ export class UsersService {
       id: user.id,
       username: user.username,
       email: user.email,
-      password: user.password,
+      // password: user.password,
       admin: user.admin,
     }));
   }
@@ -46,7 +51,7 @@ export class UsersService {
       id: user.id,
       username: user.username,
       email: user.email,
-      password: user.password,
+      // password: user.password,
       admin: user.admin,
     };
   }
@@ -56,7 +61,7 @@ export class UsersService {
     username: string,
     email: string,
     password: string,
-    admin: Boolean,
+    admin: boolean,
   ) {
     const updatedUser = await this.findUser(userId);
     if (username) {
@@ -97,5 +102,34 @@ export class UsersService {
       throw new NotFoundException('Could not find user.');
     }
     return user;
+  }
+
+  login(user: User): Observable<string> {
+    if (this.validateUser(user.email, user.password).pipe()) {
+      return this.authService.generateJWT(user);
+    } else {
+      throw Error;
+    }
+  }
+
+  validateUser(email: string, password: string): Observable<any> {
+    return this.findByMail(email).pipe(
+      switchMap((user: User) =>
+        this.authService.comparePasswords(password, user.password).pipe(
+          map((match: boolean) => {
+            if (match) {
+              const { password, ...result } = user;
+              return result;
+            } else {
+              throw Error;
+            }
+          }),
+        ),
+      ),
+    );
+  }
+
+  findByMail(email: string): Observable<User> {
+    return from(this.userModel.findOne({ email }));
   }
 }
