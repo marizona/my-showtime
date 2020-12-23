@@ -41,6 +41,7 @@ export class UsersService {
       username: user.username,
       email: user.email,
       booking: user.booking,
+      favorites: user.favorites,
       admin: user.admin,
     }));
   }
@@ -52,6 +53,7 @@ export class UsersService {
       username: user.username,
       email: user.email,
       booking: user.booking,
+      favorites: user.favorites,
       admin: user.admin,
     };
   }
@@ -112,6 +114,15 @@ export class UsersService {
 
     updatedUser.save();
     return updatedUser;
+  }
+
+  async insertFavorites(userId: string, favorites: string[]) {
+    const updatedUser = await this.findUser(userId);
+    if (favorites) {
+      updatedUser.favorites = updatedUser.favorites.concat(favorites);
+    }
+
+    updatedUser.save();
   }
 
   login(user: User): Observable<string> {
