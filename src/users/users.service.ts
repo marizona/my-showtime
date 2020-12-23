@@ -104,18 +104,7 @@ export class UsersService {
     return user;
   }
 
-  login(user: User): Observable<string> {
-    if (this.validateUser(user.email, user.password).pipe()) {
-      return this.authService.generateJWT(user);
-    } else {
-      throw Error;
-    }
-  }
-
-  async updateBooking(
-    userId: string,
-    bookingID: string,
-  ) {
+  async updateBooking(userId: string, bookingID: string) {
     const updatedUser = await this.findUser(userId);
     if (bookingID) {
       updatedUser.booking.push(bookingID);
@@ -125,24 +114,32 @@ export class UsersService {
     return updatedUser;
   }
 
-  validateUser(email: string, password: string): Observable<any> {
-    return this.findByMail(email).pipe(
-      switchMap((user: User) =>
-        this.authService.comparePasswords(password, user.password).pipe(
-          map((match: boolean) => {
-            if (match) {
-              const { password, ...result } = user;
-              return result;
-            } else {
-              throw Error;
-            }
-          }),
-        ),
-      ),
-    );
+  login(user: User): Observable<string> {
+    if (this.validateUser(user.email, user.password)) {
+      return this.authService.generateJWT(user);
+    } else {
+      throw Error;
+    }
   }
 
-  findByMail(email: string): Observable<User> {
-    return from(this.userModel.findOne({ email }));
+  async validateUser(email: string, password: string): Promise<boolean> {
+    const user = await this.findByMail(email);
+    if (this.authService.comparePasswords(password, user.password)) {
+      return true;
+    } else {
+      throw Error;
+    }
+  }
+
+  async findByMail(email: string): Promise<any> {
+    const user = await this.userModel.findOne({ email });
+    return {
+      id: user._id,
+      email: user.email,
+      username: user.username,
+      booking: user.booking,
+      admin: user.admin,
+      password: user.password,
+    };
   }
 }
