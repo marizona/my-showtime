@@ -99,4 +99,20 @@ export class UsersController {
       }),
     );
   }
+
+  @Put(':id/favorites')
+  async addFavorites(
+    @Param('id') userId: string,
+    @Body('favorites') favorites: string[],
+  ) {
+    const user = await this.usersService.insertFavorites(
+      userId,
+      favorites,
+    );
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'user updated successfully',
+    };
+  }
+
 }
