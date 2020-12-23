@@ -8,10 +8,6 @@ import {
 import { Reflector } from '@nestjs/core';
 import { UsersService } from '../../users/users.service';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { User } from '../../users/users.model';
-import { rejects } from 'assert';
-import { log } from 'util';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
@@ -30,18 +26,16 @@ export class AdminGuard implements CanActivate {
     }
     const request = context.switchToHttp().getRequest();
     const user = request.user;
-    // console.log(this.checkAdmin(user.user.email));
-    console.log(
-      this.checkAdmin(user.user.email).then((r) => {
-        return r.valueOf();
-      }),
-    );
-    this.checkAdmin(user.user.email).then((r) => {
-      return r.valueOf();
+    const result = this.checkAdmin(user.user.email);
+    return result.then((admin) => {
+      return admin;
     });
   }
 
-  checkAdmin(email: string): boolean {
-    return await this.userService.findByMail(email);
+  checkAdmin(email: string): Promise<boolean> {
+    const user = this.userService.findByMail(email);
+    return user.then((user) => {
+      return user.admin;
+    });
   }
 }

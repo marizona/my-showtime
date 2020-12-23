@@ -6,15 +6,16 @@ import {
   Param,
   Put,
   Delete,
-  HttpStatus, UseGuards
-} from "@nestjs/common";
+  HttpStatus,
+  UseGuards,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './users.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { isAdmin } from "../auth/decorator/roles.decorator";
-import { JwtAuthGuard } from "../auth/guards/jwt.guard";
-import { AdminGuard } from "../auth/guards/admin.guard";
+import { isAdmin } from '../auth/decorator/roles.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt.guard';
+import { AdminGuard } from '../auth/guards/admin.guard';
 
 @Controller('users')
 export class UsersController {
