@@ -8,6 +8,11 @@ import { User } from './users.model';
 import { AuthService } from '../auth/auth.service';
 import { from, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import jwt from "jsonwebtoken";
+import config from "../config/keys";
+import { ExtractJwt } from "passport-jwt";
+import passport from "passport";
+import { JwtStrategy } from "../auth/guards/jwt-strategy";
 
 @Injectable()
 export class UsersService {

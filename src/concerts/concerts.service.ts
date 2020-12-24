@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Concert, ConcertDocument } from './schemas/concert.schema';
+import { log } from "util";
 
 @Injectable()
 export class ConcertsService {
@@ -28,5 +29,16 @@ export class ConcertsService {
 
   async deleteConcert(id: string): Promise<Concert> {
     return this.concertModel.findByIdAndRemove(id);
+  }
+
+  async filterConcerts(type: string, query: string): Promise<Concert[]> {
+    switch (type) {
+      case 'band':
+        return this.concertModel.find({ 'band': query });
+      case 'location':
+        return this.concertModel.find({ 'location': query });
+      case 'genre':
+        return this.concertModel.find({ 'genre': query });
+    }
   }
 }

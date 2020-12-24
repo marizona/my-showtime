@@ -5,6 +5,7 @@ export type ConcertDocument = Concert & Document;
 
 @Schema()
 export class Concert {
+
   @Prop()
   band: string;
 

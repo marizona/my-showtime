@@ -4,6 +4,8 @@ import { JwtService } from '@nestjs/jwt';
 import { from, Observable, of } from 'rxjs';
 import { User } from '../users/users.model';
 import * as bcrypt from 'bcrypt';
+import config from '../config/keys';
+import jwt from 'jsonwebtoken';
 
 @Injectable()
 export class AuthService {
