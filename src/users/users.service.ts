@@ -1,13 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Headers } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-
 import * as bcrypt from 'bcrypt';
-
 import { User } from './users.model';
 import { AuthService } from '../auth/auth.service';
 import { from, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import jwt from "jsonwebtoken";
+import config from "../config/keys";
+import { ExtractJwt } from "passport-jwt";
+import passport from "passport";
+import { JwtStrategy } from '../auth/guards/jwt-strategy';
 
 @Injectable()
 export class UsersService {
@@ -107,6 +110,7 @@ export class UsersService {
   }
 
   async updateBooking(userId: string, bookingID: string) {
+
     const updatedUser = await this.findUser(userId);
     if (bookingID) {
       updatedUser.booking.push(bookingID);

@@ -8,7 +8,8 @@ import {
   Delete,
   HttpStatus,
   UseGuards,
-} from '@nestjs/common';
+  Req, Headers
+} from "@nestjs/common";
 import { UsersService } from './users.service';
 import { User } from './users.model';
 import { Observable } from 'rxjs';
@@ -16,6 +17,10 @@ import { map } from 'rxjs/operators';
 import { isAdmin } from '../auth/decorator/roles.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt.guard';
 import { AdminGuard } from '../auth/guards/admin.guard';
+import { AuthService } from '../auth/auth.service';
+import { ExtractJwt } from 'passport-jwt';
+import config from '../config/keys';
+import fromAuthHeaderAsBearerToken = ExtractJwt.fromAuthHeaderAsBearerToken;
 
 @Controller('users')
 export class UsersController {
@@ -53,11 +58,15 @@ export class UsersController {
     return user;
   }
 
+  @isAdmin(true)
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Get(':id')
   getUser(@Param('id') userId: string) {
     return this.usersService.getSingleUser(userId);
   }
 
+  @isAdmin(true)
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Put(':id')
   async updateUser(
     @Param('id') userId: string,
@@ -80,6 +89,8 @@ export class UsersController {
     };
   }
 
+  @isAdmin(true)
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Delete(':id')
   async removeuser(@Param('id') userId: string) {
     const isDeleted = await this.usersService.deleteUser(userId);
@@ -100,19 +111,17 @@ export class UsersController {
     );
   }
 
+  @isAdmin(true)
+  @UseGuards(JwtAuthGuard, AdminGuard)
   @Put(':id/favorites')
   async addFavorites(
     @Param('id') userId: string,
     @Body('favorites') favorites: string[],
   ) {
-    const user = await this.usersService.insertFavorites(
-      userId,
-      favorites,
-    );
+    const user = await this.usersService.insertFavorites(userId, favorites);
     return {
       statusCode: HttpStatus.OK,
       message: 'user updated successfully',
     };
   }
-
 }
