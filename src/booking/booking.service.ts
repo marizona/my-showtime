@@ -15,7 +15,6 @@ export class BookingService {
     private readonly bookingModel: Model<BookingDocument>,
     private readonly usersService: UsersService,
   ) {}
-  //TODO ADD MIDDLEWARE FOR ADMIN
 
   async getBookings(): Promise<Booking[]> {
     return this.bookingModel.find();
