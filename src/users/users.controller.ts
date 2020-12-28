@@ -8,8 +8,9 @@ import {
   Delete,
   HttpStatus,
   UseGuards,
-  Req, Headers
-} from "@nestjs/common";
+  Req,
+  Headers,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { User } from './users.model';
 import { Observable } from 'rxjs';
@@ -103,10 +104,15 @@ export class UsersController {
   }
 
   @Post('login')
-  login(@Body() user: User): Observable<Object> {
+  async login(@Body() user: User) {
+    const retrievedUser = await this.usersService.findByMail(user.email);
     return this.usersService.login(user).pipe(
       map((jwt: string) => {
-        return { access_token: jwt };
+        return {
+          access_token: jwt,
+          email: retrievedUser.email,
+          id: retrievedUser.id,
+        };
       }),
     );
   }
