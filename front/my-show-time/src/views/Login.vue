@@ -4,11 +4,11 @@
       <div class="col-md-6">
         <form action="/action_page.php">
           
-            <h1>Connectez-vous !</h1>
+            <h1>Login here !</h1>
             <hr />
             <input
               type="text"
-              placeholder="Email/username"
+              placeholder="Email"
               name="email"
               id="email"
               required
@@ -16,7 +16,7 @@
 
             <input
               type="password"
-              placeholder="Mot de passe"
+              placeholder="Password"
               name="psw"
               id="psw"
               required
@@ -24,14 +24,14 @@
             <hr />
 
             <div class="connexion">
-                <button type="submit" class="btn btn-info">Se connecter</button>
+                <button type="submit" class="btn btn-info">Login</button>
             </div>
             
         </form>
         </div>
 
           <div class="signin">
-            <p>Vous n'avez pas encore de compte ? <a href="#">S'inscrire</a></p>
+            <p>Not already registered ? <a href="/registration">Register</a></p>
           </div>
         
       </div>
