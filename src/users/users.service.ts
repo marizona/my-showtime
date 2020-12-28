@@ -125,7 +125,7 @@ export class UsersService {
     updatedUser.save();
   }
 
-  login(user: User): Observable<string> {
+  login(user: User){
     if (this.validateUser(user.email, user.password)) {
       return this.authService.generateJWT(user);
     } else {
@@ -149,8 +149,6 @@ export class UsersService {
       email: user.email,
       username: user.username,
       booking: user.booking,
-      admin: user.admin,
-      password: user.password,
     };
   }
 }
