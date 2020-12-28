@@ -1,0 +1,160 @@
+
+
+.nav{
+    display: flex;
+    flex-direction: column;
+    background-color: #98C1D9;
+    border: solid;
+    margin: auto;
+
+}
+
+p{
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+input::placeholder{
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+ul{
+    display: flex;
+    align-self: center;
+    flex-wrap: wrap;
+    
+    
+}
+
+li{
+    display: flex;
+    align-self: center;
+    margin: 10px;
+    list-style-type: none;
+    color: #3D5A80;
+    font-family: 'Bree Serif', serif;
+
+}
+
+.navlink a{
+    font-family: 'Bree Serif', serif;
+
+}
+
+li:hover{
+    color:#EE6C4D;
+}
+
+a{
+    cursor: pointer;
+    font-family: 'Nunito Sans', sans-serif;
+    text-decoration: none;
+    color: #3D5A80;
+}
+
+
+.nav img{
+    width: 400px;
+    height: auto;
+    margin: 0;
+
+}
+
+.footer{
+    background-color: #98C1D9;
+    margin: auto;
+}
+
+.footerCopyright{
+    display: flex;
+    justify-content: center;
+}
+
+.footerCopyright a{
+    margin-left: 5px;
+}
+
+h1, h4{
+    color: #3D5A80;
+    font-family: 'Bree Serif', serif;
+}
+
+
+
+.btn:not(:disabled):not(.disabled){
+    background-color: #EE6C4D;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.btn:not(:disabled):not(.disabled):hover{
+    background-color: #98C1D9;
+    color: #EE6C4D;
+}
+
+
+/* MISE EN PAGE LOGIN PAGE */
+
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+
+
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #dee1e4;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+
+.connexion{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.signin{
+    margin: auto;
+    margin-top: 10px;
+}
+
+
+.register{
+    margin-top: 20px;
+}
+
+
+
+.form-check{
+    justify-content:center;
+    margin:10px;
+}
+
+.checkbox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mentions{
+    display: flex;
+    margin: auto;
+    text-align: center;
+    font-size: 0.8em;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
