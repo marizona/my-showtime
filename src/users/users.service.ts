@@ -6,10 +6,10 @@ import { User } from './users.model';
 import { AuthService } from '../auth/auth.service';
 import { from, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import jwt from "jsonwebtoken";
-import config from "../config/keys";
-import { ExtractJwt } from "passport-jwt";
-import passport from "passport";
+import jwt from 'jsonwebtoken';
+import config from '../config/keys';
+import { ExtractJwt } from 'passport-jwt';
+import passport from 'passport';
 import { JwtStrategy } from '../auth/guards/jwt-strategy';
 
 @Injectable()
@@ -76,10 +76,7 @@ export class UsersService {
       updatedUser.email = email;
     }
     if (password) {
-      const salt = await bcrypt.genSalt();
-      const hash = await bcrypt.hash(password, salt);
-
-      updatedUser.password = hash;
+      updatedUser.password = await this.authService.hashPassword(password);
     }
     if (admin) {
       updatedUser.admin = admin;
@@ -110,7 +107,6 @@ export class UsersService {
   }
 
   async updateBooking(userId: string, bookingID: string) {
-
     const updatedUser = await this.findUser(userId);
     if (bookingID) {
       updatedUser.booking.push(bookingID);

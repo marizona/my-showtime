@@ -58,6 +58,7 @@
 
 
 import router from "@/router";
+import axios from "axios";
 
 export default {
   name: 'registration',
@@ -72,23 +73,75 @@ export default {
   },
 
   methods: {
-    register() {
-      if (this.username !== undefined && this.email !== undefined && this.password !== undefined && this.passwordConfirmation !== undefined) {
-        const reg = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-        // const pass =
-        if(!reg.test(this.email)) {
-          alert("Please enter a valid email")
-        } else {
-          if (this.passwordConfirmation !== this.password) {
-            alert('The two passwords aren\'t the same ')
-          } else {
-            router.push('/');
-            alert('Registration done !')
-          }
-        }
+    async register() {
+      // if (this.username !== undefined && this.email !== undefined && this.password !== undefined && this.passwordConfirmation !== undefined) {
+      //   const reg = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+      //   const pass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/i;
+      //   if(!reg.test(this.email)) {
+      //     alert("Please enter a valid email")
+      //   } else {
+      //     if (!pass.test(this.password)) {
+      //       alert("Your password must be at least 8 characters long, have at least 1 uppercase, 1 number and 1 special character")
+      //     } else {
+      //
+      //     if (this.passwordConfirmation !== this.password) {
+      //       alert('The two passwords aren\'t the same ')
+      //     } else {
+      //       const user = {
+      //         'username': this.username,
+      //         'email': this.email,
+      //         'password': this.password,
+      //       }
+      //       console.log(user);
+            const response = await this.get()
+            console.log(response);
+            console.log(router);
+            // router.push('/');
+            // alert('You have successfully registered !')
+        //   }
+        // }
+        // }
+      // } else {
+      //   alert("Please fill all fields")
+      // }
+    },
 
-      } else {
-        alert("Please fill all fields")
+    async post(user) {
+      console.log('ENTREE dans POST');
+      console.log(user);
+      try {
+        const response = await fetch('http://localhost:3000/users/', {
+          method: 'POST',
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+            // 'Accept': 'application/json',
+          },
+          body: JSON.stringify(user)
+        });
+        return response.json();
+      } catch (e) {
+        console.log(e);
+      }
+    },
+     get() {
+      try {
+        console.log('ENTREE GET');
+        axios.get('http://127.0.0.1:3000/concerts', {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/json',
+          }
+        }).then(
+            (response) => {
+             console.log(response);
+            }, (error) => {
+              console.log(error)
+            }
+        );
+        // return response;
+      } catch (e) {
+        console.log(e);
       }
     }
   }
