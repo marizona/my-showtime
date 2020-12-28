@@ -59,6 +59,7 @@ export default {
           }
           await this.apiLogin(user);
           await router.push('/');
+          this.logged = true
         }
       },
 
@@ -72,6 +73,7 @@ export default {
           localStorage.setItem("token", response.data.access_token)
           localStorage.setItem("id", response.data.id)
           localStorage.setItem("email", response.data.email)
+          this.store.login();
         }, (error) => {
           alert(error)
         });
