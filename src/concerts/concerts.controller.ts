@@ -24,7 +24,7 @@ export class ConcertsController {
     return this.concertsService.getConcerts();
   }
 
-  @isAdmin(true)
+  
   @UseGuards(JwtAuthGuard, AdminGuard)
   @Get('filter/:type/:query')
   async filterConcert(
@@ -38,19 +38,19 @@ export class ConcertsController {
   async getConcert(@Param('id') id): Promise<Concert> {
     return this.concertsService.getConcert(id);
   }
-  @isAdmin(true)
+  
   @UseGuards(JwtAuthGuard, AdminGuard)
   @Post()
   createConcert(@Body() createConcertDto: CreateConcertsDto): Promise<Concert> {
     return this.concertsService.createConcert(createConcertDto);
   }
-  @isAdmin(true)
+  
   @UseGuards(JwtAuthGuard, AdminGuard)
   @Delete(':id')
   deleteConcert(@Param('id') id): Promise<Concert> {
     return this.concertsService.deleteConcert(id);
   }
-  @isAdmin(true)
+  
   @UseGuards(JwtAuthGuard, AdminGuard)
   @Put(':id')
   updateConcert(
