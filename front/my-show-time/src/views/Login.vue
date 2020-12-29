@@ -32,7 +32,8 @@
           <div class="signin">
             <p>Not already registered ? <a href="/registration">Register</a></p>
           </div>
-        
+
+
       </div>
 
 

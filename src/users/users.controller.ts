@@ -59,8 +59,8 @@ export class UsersController {
     return user;
   }
 
-  @isAdmin(true)
-  @UseGuards(JwtAuthGuard, AdminGuard)
+  // @isAdmin(true)
+  // @UseGuards(JwtAuthGuard)
   @Get(':id')
   getUser(@Param('id') userId: string) {
     return this.usersService.getSingleUser(userId);

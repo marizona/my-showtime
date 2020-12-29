@@ -6,10 +6,11 @@ import 'bootstrap/dist/css/bootstrap.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import store from './store'
+import Vuex from 'vuex'
 
 Window.Vue=require('vue')
 
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios, Vuex)
 Vue.config.productionTip = false
 Window.forEvent=new Vue()
 

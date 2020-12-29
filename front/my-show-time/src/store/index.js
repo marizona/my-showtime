@@ -3,7 +3,6 @@ import Vue from "vue";
 import axios from "axios";
 import router from "@/router";
 
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -12,24 +11,24 @@ export default new Vuex.Store({
 
   //  USERS
   users: [{}],
-  logged: false,
+  logged: {
+    log: localStorage.getItem('token') || null,
+  },
   //  CONCERTS
+  concerts: [{}],
 
   },
 
   getters: {
 
   //  USERS
-  getLog() {
-    return this.logged();
-  }
+  getUser: state => state.users,
+  getLog: state => state.logged,
   //  CONCERTS
-
-
+  allConcerts: state => state.concerts,
   },
 
   actions: {
-
   //  USERS
     async logUser({ commit }, user) {
       if (user.email === undefined && user.password === undefined) {
@@ -78,10 +77,47 @@ export default new Vuex.Store({
         alert("Please fill all fields")
       }},
 
+   async fetchConcerts({commit}) {
+      console.log("API CONCERT");
+      const response = await axios.get('http://127.0.0.1:3000/concerts');
+      if (response.status === 200) {
+        commit('stateConcerts', response.data);
+      } else {
+        alert("Something's gone wrong")
+      }
+    },
 
+    async refreshUser({commit}) {
+      console.log("REFRESH USER");
+      console.log(localStorage.getItem('id'));
+      const url = 'http://127.0.0.1:3000/users/' + localStorage.getItem('id');
+      const response = await axios.get(url, {
+        'authorization': localStorage.getItem('token')
+      });
+
+      console.log(response);
+      commit('stateRefreshUser', response.data)
+    },
 
 
   //  CONCERTS
+
+    async bookConcert({ commit }, concert) {
+      const url = 'http://127.0.0.1:3000/booking/' + concert;
+      const body = {};
+      console.log(url);
+      const response = await axios.post(url, body, {
+        headers: {
+        'Authorization': localStorage.getItem('token')
+        }
+      } )
+      if (response.status === 201) {
+        commit("updateUser", concert)
+      } else {
+        alert("Something's gone wrong")
+      }
+    }
+
   },
 
   mutations: {
@@ -91,25 +127,38 @@ export default new Vuex.Store({
     console.log("MUTATION");
     console.log(data);
     state.users = data;
+    // state.logged = true;
     localStorage.setItem('token', data.access_token);
     localStorage.setItem('id', data.id);
     localStorage.setItem('username', data.username);
     localStorage.setItem('email', data.email);
-    state.logged = true;
     alert(`You are now connected as ${data.username}`);
     router.push('/');
   },
 
   stateLogout(state) {
-    state.logged = false;
+    console.log(state);
+    // state.logged = false;
     localStorage.clear();
   },
 
   async userCreated() {
     await router.push('/');
-  }
+  },
+
+  updateUser(state, concert) {
+    alert("Concert booked !")
+    state.users.booking += concert;
+  },
+
+    stateRefreshUser(state, user){
+    state.users = user;
+    },
 
   //  CONCERTS
+  stateConcerts(state, data) {
+    state.concerts = data;
+  },
 
 
   }
