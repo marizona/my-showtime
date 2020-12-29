@@ -40,7 +40,7 @@ export class UsersService {
   async getUsers() {
     const users = await this.userModel.find().exec();
     return users.map((user) => ({
-      id: user.id,
+      _id: user._id,
       username: user.username,
       email: user.email,
       booking: user.booking,

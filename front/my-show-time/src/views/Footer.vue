@@ -1,35 +1,25 @@
 <template>
-
-<div class="footer">
-    <!-- Footer -->
-
+  <!-- Footer -->
+  <footer class="page-footer font-small unique-color-dark pt-4">
+    <!-- Footer Elements -->
+    <div class="container"></div>
+    <!-- Footer Elements -->
 
     <!-- Copyright -->
-    <div class="footerCopyright text-center py-3"><p>© 2020 Copyright:</p>
-        <a  href="https://mdbootstrap.com/">GeeksAssociés.com</a>
+    <div class="footer-copyright text-center py-3">
+      © 2020 Copyright:
+      <a href="https://concert.eu/"> book a concert</a>
     </div>
     <!-- Copyright -->
-
-
-<!-- Footer -->
-
-
-
-
-</div>
-
-
+  </footer>
+  <!-- Footer -->
 </template>
 
 
 
 <script>
-export default {
-  
-}
+export default {};
 </script>
 
 <style  src='./app.css'>
-
 </style>
-

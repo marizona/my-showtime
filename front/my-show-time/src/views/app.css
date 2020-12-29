@@ -1,112 +1,7 @@
 
-
-.nav{
-    display: flex;
-    flex-direction: column;
-    background-color: #98C1D9;
-    border: solid;
-    margin: auto;
-
-}
-
-p{
-    font-family: 'Nunito Sans', sans-serif;
-}
-
-input::placeholder{
-    font-family: 'Nunito Sans', sans-serif;
-}
-
-ul{
-    display: flex;
-    align-self: center;
-    flex-wrap: wrap;
-    
-    
-}
-
-li{
-    display: flex;
-    align-self: center;
-    margin: 10px;
-    list-style-type: none;
-    color: #3D5A80;
-    font-family: 'Bree Serif', serif;
-
-}
-
-.navlink a{
-    font-family: 'Bree Serif', serif;
-
-}
-
-li:hover{
-    color:#EE6C4D;
-}
-
-a{
-    cursor: pointer;
-    font-family: 'Nunito Sans', sans-serif;
-    text-decoration: none;
-    color: #3D5A80;
-}
-
-
-.nav img{
-    width: 400px;
-    height: auto;
-    margin: 0;
-
-}
-
-.footer{
-    background-color: #98C1D9;
-    margin: auto;
-}
-
-.footerCopyright{
-    display: flex;
-    justify-content: center;
-}
-
-.footerCopyright a{
-    margin-left: 5px;
-}
-
-h1, h4{
-    color: #3D5A80;
-    font-family: 'Bree Serif', serif;
-}
-
-
-
-.btn:not(:disabled):not(.disabled){
-    background-color: #EE6C4D;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-family: 'Nunito Sans', sans-serif;
-}
-
-.btn:not(:disabled):not(.disabled):hover{
-    background-color: #98C1D9;
-    color: #EE6C4D;
-}
-
-
-/* MISE EN PAGE LOGIN PAGE */
-
-.login{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-
-
-}
-
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -120,41 +15,333 @@ input[type="password"]:focus {
   outline: none;
 }
 
-
-.connexion{
-    display: flex;
-    justify-content: center;
-    margin: 20px;
+input::placeholder {
+  font-family: "Martel Sans", sans-serif;
 }
 
-.signin{
-    margin: auto;
-    margin-top: 10px;
+textarea {
+  border: none;
+  background: #dee1e4;
+  padding: 15px;
+  margin: 5px 0 22px 0;
 }
 
+/* MISE EN PAGE TABLEAUX */
 
-.register{
-    margin-top: 20px;
+thead {
+  text-align: center;
 }
 
-
-
-.form-check{
-    justify-content:center;
-    margin:10px;
+tbody {
+  text-align: center;
 }
 
-.checkbox{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+table {
+  box-shadow: 3px 3px 30px 3px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  padding: 10px;
 }
 
-.mentions{
-    display: flex;
-    margin: auto;
-    text-align: center;
-    font-size: 0.8em;
-    font-family: 'Nunito Sans', sans-serif;
+.nav {
+  display: flex;
+  flex-direction: column;
+  background-color: #98c1d9;
+  border: solid;
+  margin: auto;
 }
 
+p {
+  font-family: "Martel Sans", sans-serif;
+}
+
+ul {
+  display: flex;
+  align-self: center;
+  flex-wrap: wrap;
+  float: right;
+  padding-top: 20px;
+}
+
+li {
+  display: flex;
+  align-self: center;
+  margin: 10px;
+  list-style-type: none;
+  color: #2c528c;
+  font-family: "Bree Serif", serif;
+}
+
+.navlink a {
+  font-family: "Martel sans", serif;
+}
+
+li:hover {
+  color: #ee6c4d;
+}
+
+a {
+  cursor: pointer;
+  font-family: "Martel Sans", sans-serif;
+  text-decoration: none;
+  color: #3d5a80;
+}
+
+.navbar-brand.toplogo {
+  margin-right: 0;
+}
+
+.margin-left {
+  margin-left: auto;
+}
+
+.toplogo img {
+  max-height: 50px;
+  max-width: 80%;
+}
+
+.nav img {
+  width: 400px;
+  height: auto;
+  margin: 0;
+}
+
+.footer {
+  background-color: #98c1d9;
+  margin: auto;
+}
+
+.footerCopyright {
+  display: flex;
+  justify-content: center;
+}
+
+.footerCopyright a {
+  margin-left: 5px;
+}
+
+h1,
+h4 {
+  color: #2c528c;
+  font-family: "Martel Sans", serif;
+  text-align: center;
+}
+
+/*MISE EN PAGE BOUTONS */
+
+.btn:not(:disabled):not(.disabled) {
+  background-color: #51a0d5;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+.btn:not(:disabled):not(.disabled):hover {
+  background-color: #51a0d5;
+  color: #ffffff;
+}
+
+.action {
+  padding: 4px;
+  border-radius: 8px;
+  background-color: #51a0d5;
+  color: #ffffff;
+  border: none;
+}
+
+.action:hover {
+  background-color: #51a0d5;
+  color: white;
+}
+
+/*LOGIN PAGE */
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.validateButton {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.signin {
+  margin: auto;
+  margin-top: 10px;
+}
+
+.register {
+  margin-top: 20px;
+}
+
+.form-check {
+  justify-content: center;
+  margin: 10px;
+}
+
+.checkbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mentions {
+  display: flex;
+  margin: auto;
+  text-align: center;
+  font-size: 0.8em;
+  font-family: "Nunito Sans", sans-serif;
+}
+
+/* MISE EN PAGE PROFILE PAGE */
+
+.infosUser {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.projUser {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  text-align: justify;
+  padding: 10px;
+}
+
+.cardDisplay {
+  box-shadow: 3px 3px 30px 3px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+  padding: 20px;
+}
+
+.displayProjUser {
+  display: flex;
+}
+
+/* MISE EN PAGE PROJECT PAGE */
+
+.descrProj {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+  text-align: justify;
+  padding: 10px;
+}
+
+.teamProject {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+}
+
+.addMember {
+  display: flex;
+  justify-content: center;
+}
+
+#deleteTeam {
+  border-radius: 8px;
+  padding: 10px;
+  border: none;
+  display: flex;
+  margin: auto;
+  margin-top: 20px;
+}
+
+#deleteTeam:hover {
+  background-color: #ec6a6a;
+}
+
+.addTeam {
+  margin: 20px;
+}
+
+.inputAddTeam {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+#projTeam {
+  margin: 20px;
+}
+
+.chatbox {
+  display: flex;
+  flex-direction: column;
+  border: solid;
+  border-radius: 20px;
+  text-align: center;
+  width: 35%;
+  margin-left: auto;
+}
+
+.basPageProj {
+  margin: 20px;
+  display: flex;
+}
+
+.chatbox button {
+  background-color: #ee6c4d;
+  color: white;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-family: "Martel Sans", sans-serif;
+  padding: 6px;
+  margin: 4px;
+}
+
+.chatbox button:hover {
+  background-color: #98c1d9;
+  color: #ee6c4d;
+}
+
+.freelancesList {
+  display: flex;
+  flex-direction: column;
+}
+
+.freelance {
+  margin: 10px;
+}
+
+.endProj h3 {
+  border: solid;
+}
+
+.endProj h4 {
+  border: solid;
+}
+
+/* MISE EN PAGE DASHBOARDS */
+
+.newProjDescr {
+  display: flex;
+  flex-direction: column;
+}
+
+.newProjDescr button {
+  border: solid;
+  width: 20%;
+}
+
+.noProject {
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+}
+
+.crudInfos {
+  display: flex;
+  flex-direction: column;
+}
