@@ -3,13 +3,7 @@ import VueRouter from 'vue-router'
 import Registration from '../views/Registration.vue'
 import Login from '../views/Login.vue'
 import Home from '../views/Home'
-
-
-
-
-
-
-
+import Concert from '../views/Components/Concert'
 
 Vue.use(VueRouter)
 
@@ -29,6 +23,11 @@ const routes = [
     name: 'registration',
     component: Registration
   },
+  {
+    path: '/:concertId',
+    name: 'Single Concert',
+    component: Concert,
+  }
 
   
 ]

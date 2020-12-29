@@ -18,6 +18,7 @@ export default new Vuex.Store({
   concerts: [{}],
 
   },
+  actualConcert: [{}],
 
   getters: {
 
@@ -103,7 +104,7 @@ export default new Vuex.Store({
   //  CONCERTS
 
     async bookConcert({ commit }, concert) {
-      const url = 'http://127.0.0.1:3000/booking/' + concert;
+      const url = 'http://127.0.0.1:3000/booking/' + concert._id;
       const body = {};
       console.log(url);
       const response = await axios.post(url, body, {
@@ -134,12 +135,13 @@ export default new Vuex.Store({
     localStorage.setItem('email', data.email);
     alert(`You are now connected as ${data.username}`);
     router.push('/');
+    window.location.reload();
   },
 
   stateLogout(state) {
     console.log(state);
-    // state.logged = false;
     localStorage.clear();
+
   },
 
   async userCreated() {
@@ -148,7 +150,8 @@ export default new Vuex.Store({
 
   updateUser(state, concert) {
     alert("Concert booked !")
-    state.users.booking += concert;
+    state.users.booking += concert._id;
+    router.push('/' + concert._id);
   },
 
     stateRefreshUser(state, user){
