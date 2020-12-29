@@ -5,6 +5,7 @@ import 'bootstrap/dist/js/bootstrap.js'
 import 'bootstrap/dist/css/bootstrap.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import store from './store'
 import Vuex from 'vuex'
 
 Window.Vue=require('vue')
@@ -16,6 +17,7 @@ Window.forEvent=new Vue()
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
 

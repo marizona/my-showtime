@@ -24,7 +24,7 @@
             <hr />
 
             <div class="connexion">
-                <button @click="this.login" class="btn btn-info">Login</button>
+                <button @click.prevent="logUser({email,  password})" class="btn btn-info">Login</button>
             </div>
             
         </div>
@@ -32,7 +32,8 @@
           <div class="signin">
             <p>Not already registered ? <a href="/registration">Register</a></p>
           </div>
-        
+
+
       </div>
 
 
@@ -40,8 +41,7 @@
 
 <script>
 
-import axios from 'axios';
-import router from "@/router";
+import { mapActions } from 'vuex';
 
 export default {
     name: 'login',
@@ -51,33 +51,7 @@ export default {
   },
 
   methods: {
-      async login() {
-        if (this.email !== undefined && this.password !== undefined) {
-          const user = {
-            'email' : this.email,
-            'password': this.password,
-          }
-          await this.apiLogin(user);
-          await router.push('/');
-          this.logged = true
-        }
-      },
-
-      async apiLogin(user) {
-        axios.post('http://127.0.0.1:3000/users/login', {
-          'email': user.email,
-          'password': user.password,
-        }).then((response) => {
-          console.log(response);
-          alert('You are now logged in')
-          localStorage.setItem("token", response.data.access_token)
-          localStorage.setItem("id", response.data.id)
-          localStorage.setItem("email", response.data.email)
-          this.store.login();
-        }, (error) => {
-          alert(error)
-        });
-      }
+      ...mapActions(["logUser"]),
   }
 }
 </script>

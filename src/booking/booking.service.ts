@@ -27,10 +27,10 @@ export class BookingService {
       concertID: concertID,
       date: Date.now(),
     });
-
+    console.log(headers);
     const booking = await newBooking.save();
-
     const tokenToParse = headers.authorization;
+    console.log(tokenToParse);
     const token = tokenToParse.substring(7);
     const result = jwt_decode(token);
     const email = result['user']['email'];

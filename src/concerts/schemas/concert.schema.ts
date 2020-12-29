@@ -13,7 +13,7 @@ export class Concert {
   date: string;
 
   @Prop()
-  hour: number;
+  hour: string;
 
   @Prop()
   location: string;

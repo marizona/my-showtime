@@ -5,26 +5,25 @@
     <div class="imgNavbar">
       <img src="../assets/logo.png" />
     </div>
-    
+<!--    <h1>{{getLog}}</h1>-->
     <ul >
-         
          <li class="navlink">
            <a @click="$router.push('/')">Home</a>
          </li>
-      <div v-if="!logged">
+      <div v-if="!getLog.log">
          <li class="navlink">
            <a @click="$router.push('/login')">Login</a>
          </li >
       </div>
-      <div v-if="logged">
+      <div v-if="getLog.log">
         <li class="navlink">
-          <a @click="logout">Log Out</a>
+          <a @click="logOut">Log Out</a>
         </li >
       </div>
            <li class="navlink">
            <a @click="$router.push('/registration')">Registration</a>
          </li>
-          
+
       </ul>
   </div>
 </div>
@@ -35,28 +34,17 @@
 
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
-  props: {
-    logged: Boolean,
-  },
+  // props: {
+  //   logged: Boolean,
+  // },
 
   methods: {
-    checkLog() {
-      this.logged = localStorage.getItem('token') !== null;
-    },
-    logout() {
-      this.logged = false;
-    }
+    ...mapActions(['logOut']),
   },
-  created() {
-   this.checkLog();
-  },
-  computed() {
-    this.checkLog();
-  },
-  login() {
-    this.logged = true;
-  }
+  computed: mapGetters(['getLog', 'getUser']),
 
 
 }
