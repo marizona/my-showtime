@@ -151,7 +151,7 @@ export default new Vuex.Store({
   updateUser(state, concert) {
     alert("Concert booked !")
     state.users.booking += concert._id;
-    router.push('/' + concert._id);
+    router.push('/concert/' + concert._id);
   },
 
     stateRefreshUser(state, user){
