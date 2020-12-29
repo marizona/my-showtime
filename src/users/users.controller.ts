@@ -112,6 +112,7 @@ export class UsersController {
           access_token: jwt,
           email: retrievedUser.email,
           id: retrievedUser.id,
+          username: retrievedUser.username,
         };
       }),
     );
