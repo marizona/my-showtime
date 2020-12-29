@@ -335,10 +335,7 @@ export default {
           },
 
           {
-            headers: {
-              Authorization:
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoidGVzdEB0ZXN0LmZyIiwicGFzc3dvcmQiOiJ0ZXN0dGVzdCJ9LCJpYXQiOjE2MDkxNjc4MjIsImV4cCI6MTYxMDE2NzgyMn0.WPR1A5flwrQ_sryW9sn14kbdTHgtgxEHiZgZZQgX03w',
-            },
+             'authorization': localStorage.getItem('token')
           },
         )
         .then(function (response) {
@@ -359,10 +356,7 @@ export default {
       let vm = this;
       this.axios
         .delete('http://localhost:3000/concerts/' + id, {
-          headers: {
-            Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoidGVzdEB0ZXN0LmZyIiwicGFzc3dvcmQiOiJ0ZXN0dGVzdCJ9LCJpYXQiOjE2MDkxNjc4MjIsImV4cCI6MTYxMDE2NzgyMn0.WPR1A5flwrQ_sryW9sn14kbdTHgtgxEHiZgZZQgX03w',
-          },
+           'authorization': localStorage.getItem('token')
         })
         .then(function () {
           window.location.reload();
@@ -384,10 +378,7 @@ export default {
             price: this.users.price,
           },
           {
-            headers: {
-              Authorization:
-                'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoidGVzdEB0ZXN0LmZyIiwicGFzc3dvcmQiOiJ0ZXN0dGVzdCJ9LCJpYXQiOjE2MDkxNjc4MjIsImV4cCI6MTYxMDE2NzgyMn0.WPR1A5flwrQ_sryW9sn14kbdTHgtgxEHiZgZZQgX03w',
-            },
+             'authorization': localStorage.getItem('token')
           },
         )
         .then(function (response) {
