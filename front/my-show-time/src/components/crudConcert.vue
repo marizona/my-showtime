@@ -42,7 +42,7 @@
                   data-toggle="modal"
                   @click="EditUser(index)"
                   ><svg
-                   style="width: 20px"
+                    style="width: 20px"
                     class="w-6 h-6"
                     fill="none"
                     stroke="currentColor"
@@ -308,7 +308,6 @@
 export default {
   created() {
     this.fetchUser();
-   
   },
   computed: {
     userdata() {
@@ -320,8 +319,6 @@ export default {
       this.UserIdEdit = id;
     },
     modifyUser(user) {
-  
-
       this.axios
         .put(
           'http://localhost:3000/concerts/' + user._id,
@@ -333,9 +330,10 @@ export default {
             genre: user.genre,
             price: user.price,
           },
-
           {
-             'authorization': localStorage.getItem('token')
+            headers: {
+              Authorization: 'Bearer ' + localStorage.getItem('token'),
+            },
           },
         )
         .then(function (response) {
@@ -356,8 +354,10 @@ export default {
       let vm = this;
       this.axios
         .delete('http://localhost:3000/concerts/' + id, {
-           'authorization': localStorage.getItem('token')
-        })
+            headers: {
+              Authorization: 'Bearer ' + localStorage.getItem('token'),
+            },
+          },)
         .then(function () {
           window.location.reload();
 
@@ -377,8 +377,10 @@ export default {
             genre: this.users.genre,
             price: this.users.price,
           },
-          {
-             'authorization': localStorage.getItem('token')
+         {
+            headers: {
+              Authorization: 'Bearer ' + localStorage.getItem('token'),
+            },
           },
         )
         .then(function (response) {

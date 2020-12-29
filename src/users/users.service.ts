@@ -144,8 +144,9 @@ export class UsersService {
 
   async findByMail(email: string): Promise<any> {
     const user = await this.userModel.findOne({ email });
+    console.log(user)
     return {
-      id: user._id,
+      id: user.id,
       email: user.email,
       username: user.username,
       booking: user.booking,

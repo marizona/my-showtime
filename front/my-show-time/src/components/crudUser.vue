@@ -42,7 +42,7 @@
                   data-toggle="modal"
                   @click="EditUser(index)"
                   ><svg
-                   style="width: 20px"
+                    style="width: 20px"
                     class="w-6 h-6"
                     fill="none"
                     stroke="currentColor"
@@ -55,8 +55,7 @@
                       stroke-width="2"
                       d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
                     ></path></svg
-                ></a
-                >
+                ></a>
                 <a
                   @click="EditUser(index)"
                   href="#deleteuserModel"
@@ -76,8 +75,7 @@
                       stroke-width="2"
                       d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                     ></path></svg
-                ></a
-                >
+                ></a>
               </td>
             </tr>
           </tbody>
@@ -129,7 +127,6 @@
                   required
                 />
               </div>
-              
             </div>
             <div class="modal-footer">
               <input
@@ -200,7 +197,6 @@
                   v-model="userdata[UserIdEdit].admin"
                 />
               </div>
-              
             </div>
             <div class="modal-footer">
               <input
@@ -299,10 +295,11 @@ export default {
             email: user.email,
             admin: user.admin,
             password: user.password,
-          
           },
-
-          {'authorization': localStorage.getItem('token')
+          {
+            headers: {
+              Authorization: 'Bearer ' + localStorage.getItem('token'),
+            },
           },
         )
         .then(function (response) {
@@ -310,15 +307,14 @@ export default {
         });
     },
 
-    
     fetchUser() {
       var vm = this;
       this.axios
-        .get('http://localhost:3000/users',  {
-            
-              'authorization': localStorage.getItem('token')
-            
-          })
+        .get('http://localhost:3000/users', {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+          },
+        })
 
         .then(function (response) {
           console.log(response.data);
@@ -326,20 +322,20 @@ export default {
         });
     },
     async deleteUser(id) {
-     
-     let vm = this
+      let vm = this;
       this.axios
-        .delete("http://localhost:3000/users/" + id,  {
-            'authorization': localStorage.getItem('token')
-          },)
+        .delete('http://localhost:3000/users/' + id, {
+          headers: {
+            Authorization: 'Bearer ' + localStorage.getItem('token'),
+          },
+        })
         .then(function () {
-            window.location.reload()
-          
+          window.location.reload();
+
           vm.fetchUser();
         });
     },
     addUser() {
-
       var vm = this;
       this.axios
         .post(
@@ -347,20 +343,21 @@ export default {
           {
             username: this.users.username,
             email: this.users.email,
-            password: this.users.password
-           
-        
-          }, {'authorization': localStorage.getItem('token')}
-        
+            password: this.users.password,
+          },
+          {
+            headers: {
+              Authorization: 'Bearer ' + localStorage.getItem('token'),
+            },
+          },
         )
         .then(function (response) {
           console.log(response.data);
           vm.fetchUser();
           vm.users.username = '';
           vm.users.email = '';
-          vm.users.password= '';
+          vm.users.password = '';
           vm.users.admin = '';
-       
         });
     },
   },
@@ -372,7 +369,6 @@ export default {
         username: '',
         email: '',
         admin: '',
-      
       },
       UserIdEdit: 0,
       privileges: [],

@@ -30,3 +30,4 @@ export class BookingController {
     return this.bookingService.book(id, headers);
   }
 }
+  
