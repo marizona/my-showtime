@@ -46,7 +46,6 @@
 
 
 <script>
-<<<<<<< HEAD
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -61,9 +60,6 @@ export default {
 
 
 }
-=======
-export default {};
->>>>>>> 5382daf... add admin page
 </script>
 
 <style  src='./app.css' scoped>
