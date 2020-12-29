@@ -44,7 +44,43 @@ export default new Vuex.Store({
 
     logOut({commit}) {
       commit("stateLogout")
-    }
+    },
+
+    async register({commit}, user) {
+      if (user.username !== undefined && user.email !== undefined && user.password !== undefined && user.passwordConfirmation !== undefined) {
+        const reg = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+        const pass = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/i;
+        if(!reg.test(user.email)) {
+          alert("Please enter a valid email")
+        } else {
+          if (!pass.test(user.password)) {
+            alert("Your password must be at least 8 characters long, have at least 1 uppercase, 1 number and 1 special character")
+          } else {
+
+            if (user.passwordConfirmation !== user.password) {
+              alert('The two passwords aren\'t the same ')
+            } else {
+              const response = await axios.post('http://localhost:3000/users', {
+                'username': user.username,
+                'password': user.password,
+                'email': user.email,
+              });
+              if (response.status === 201) {
+                alert("User created, please log in")
+                commit('userCreated')
+              } else {
+                alert("Something's gone wrong...")
+              }
+            }
+          }
+        }
+      } else {
+        alert("Please fill all fields")
+      }},
+
+
+
+
   //  CONCERTS
   },
 
@@ -67,7 +103,12 @@ export default new Vuex.Store({
   stateLogout(state) {
     state.logged = false;
     localStorage.clear();
+  },
+
+  async userCreated() {
+    await router.push('/');
   }
+
   //  CONCERTS
 
 
