@@ -25,7 +25,7 @@ const routes = [
     component: Registration
   },
   {
-    path: '/:concertId',
+    path: '/concert/:concertId',
     name: 'Single Concert',
     component: Concert,
   },
