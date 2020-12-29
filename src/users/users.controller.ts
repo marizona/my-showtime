@@ -51,7 +51,7 @@ export class UsersController {
     };
   }
 
-  @isAdmin(true)
+ 
   @UseGuards(JwtAuthGuard, AdminGuard)
   @Get()
   async getAllUsers() {
@@ -66,7 +66,7 @@ export class UsersController {
     return this.usersService.getSingleUser(userId);
   }
 
-  @isAdmin(true)
+  
   @UseGuards(JwtAuthGuard, AdminGuard)
   @Put(':id')
   async updateUser(
@@ -90,7 +90,7 @@ export class UsersController {
     };
   }
 
-  @isAdmin(true)
+  
   @UseGuards(JwtAuthGuard, AdminGuard)
   @Delete(':id')
   async removeuser(@Param('id') userId: string) {
@@ -118,7 +118,7 @@ export class UsersController {
     );
   }
 
-  @isAdmin(true)
+  
   @UseGuards(JwtAuthGuard, AdminGuard)
   @Put(':id/favorites')
   async addFavorites(
