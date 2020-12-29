@@ -1,12 +1,15 @@
 <template>
 
 <div class="header">
-  <div class="nav row">
-    <div class="imgNavbar">
-      <img src="../assets/logo.png" />
-    </div>
-<!--    <h1>{{getLog}}</h1>-->
-    <ul >
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Concert</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <div class="navbar-nav">
+         <ul >
+         
          <li class="navlink">
            <a @click="$router.push('/')">Home</a>
          </li>
@@ -23,10 +26,19 @@
            <li class="navlink">
            <a @click="$router.push('/registration')">Registration</a>
          </li>
-
+         <li class="navlink">
+           <a @click="$router.push('/admin')">admin</a>
+         </li>
+          
+          
       </ul>
+    </div>
   </div>
-</div>
+</nav>
+
+    </div>
+    
+   
 
 
 </template>
@@ -34,6 +46,7 @@
 
 
 <script>
+<<<<<<< HEAD
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -48,8 +61,10 @@ export default {
 
 
 }
+=======
+export default {};
+>>>>>>> 5382daf... add admin page
 </script>
 
 <style  src='./app.css' scoped>
-
 </style>

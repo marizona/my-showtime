@@ -22,6 +22,7 @@ export class BookingService {
   async getBooking(id: string): Promise<Booking> {
     return this.bookingModel.findOne({ _id: id });
   }
+
   async book(concertID: string, headers): Promise<Booking> {
     const newBooking = new this.bookingModel({
       concertID: concertID,
